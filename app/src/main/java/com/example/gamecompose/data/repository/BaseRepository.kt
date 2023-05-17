@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
  * @data : 17.05.2023
  */
 
-class BaseRepository {
+open class BaseRepository {
 
    suspend fun <T> invokeApi(apiCall: suspend () -> T): ResourceNetwork<T> {
       return withContext(Dispatchers.IO) {
