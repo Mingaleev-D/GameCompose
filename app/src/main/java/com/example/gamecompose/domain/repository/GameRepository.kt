@@ -10,5 +10,5 @@ import com.example.gamecompose.domain.model.Game
 
 interface GameRepository {
 
-   suspend fun getAllGames():ResourceNetwork<List<Game>>
+   suspend fun getAllGames(): ResourceNetwork<List<Game>>
 }
