@@ -13,6 +13,7 @@ import com.example.gamecompose.domain.model.GameDetail
 interface GameRepository {
 
    suspend fun getAllGames(): ResourceNetwork<List<Game>>
-
    suspend fun getGame(id:Int):ResourceNetwork<GameDetail?>
+   suspend fun getGamesByPlatform(platform :String): ResourceNetwork<List<Game>>
+   suspend fun sortGames(criteria: String): ResourceNetwork<List<Game>>
 }
