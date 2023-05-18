@@ -1,43 +1,63 @@
 package com.example.gamecompose.ui.main
 
+import GameComposeTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.gamecompose.ui.theme.GameComposeTheme
+import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.compose.rememberNavController
+import com.example.gamecompose.ui.screens.base.Index
+import com.example.gamecompose.ui.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+   private val mainViewModel: MainViewModel by viewModels()
    override fun onCreate(savedInstanceState: Bundle?) {
       super.onCreate(savedInstanceState)
-      setContent {
-         GameComposeTheme {
-            Surface(modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background) {
-               Greeting("Android")
-            }
+      installSplashScreen().apply {
+         setKeepOnScreenCondition {
+            mainViewModel.splashScreenVisible.value
          }
       }
-   }
-}
+      setContent {
+         val scaffoldState = rememberScaffoldState()
+         val navController = rememberNavController()
+         val availableGames by mainViewModel.games.collectAsState()
+         val scope = rememberCoroutineScope()
+         val uriHandler = LocalUriHandler.current
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-   Text(
-       text = "Hello $name!",
-       modifier = modifier
-   )
-}
+         GameComposeTheme(
+             darkTheme = isSystemInDarkTheme()
+         ) {
+            Index(
+                scaffoldState = scaffoldState,
+                navController = navController,
+                availableGames = availableGames,
+                onOpenDrawer = {
+                   scope.launch { scaffoldState.drawerState.open() }
+                },
+                onSearchButtonClick = {
 
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-   GameComposeTheme {
-      Greeting("Android")
+                },
+                onGameClick = { gameId ->
+                   navController.navigate(route = "gameDetails/$gameId")
+                },
+                onPlayTheGameClicked = {gameUrl ->
+                   uriHandler.openUri(uri = gameUrl)
+                }
+            )
+         }
+      }
    }
 }
