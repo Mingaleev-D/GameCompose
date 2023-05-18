@@ -76,7 +76,7 @@ fun HomeScreen(onOpenDrawer: () -> Unit,
             LazyVerticalGrid(columns = GridCells.Fixed(count = 2)) {
                header {
                   CarouselView(modifier = Modifier
-                     .requiredHeight(height = 260.dp)
+                     .requiredHeight(height = 240.dp)
                      .fillMaxWidth()
                      .padding(vertical = 8.dp, horizontal = 12.dp),
                                urls = games.getUrls(),

@@ -1,7 +1,9 @@
 package com.example.gamecompose.domain.repository
 
 import com.example.gamecompose.data.common.ResourceNetwork
+import com.example.gamecompose.data.remote.model.GameDetailsItem
 import com.example.gamecompose.domain.model.Game
+import com.example.gamecompose.domain.model.GameDetail
 
 /**
  * @author : Mingaleev D
@@ -11,4 +13,6 @@ import com.example.gamecompose.domain.model.Game
 interface GameRepository {
 
    suspend fun getAllGames(): ResourceNetwork<List<Game>>
+
+   suspend fun getGame(id:Int):ResourceNetwork<GameDetail?>
 }

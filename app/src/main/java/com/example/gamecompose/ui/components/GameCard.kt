@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -31,9 +32,9 @@ fun GameCard(
 ) {
    Card(shape = MaterialTheme.shapes.small,
         modifier = modifier
-           .padding(all = 8.dp)
+           .padding(all = 1.dp)
            .clickable { onClick() },
-        elevation = 8.dp,
+        elevation = 10.dp,
         backgroundColor = MaterialTheme.colors.surface
    ) {
       Column(modifier = Modifier.fillMaxSize()
@@ -76,6 +77,7 @@ fun GameCard(
                    style = MaterialTheme.typography.body1,
                    overflow = TextOverflow.Ellipsis,
                    color = MaterialTheme.colors.onPrimary,
+                   textAlign = TextAlign.Center
                )
                Box(modifier = Modifier
                   .fillMaxWidth(fraction = 0.95f)
@@ -98,7 +100,7 @@ fun GameCard(
                    backgroundColor = MaterialTheme.colors.primaryVariant,
                    borderWidth = 1.dp,
                ) {
-                  Text(modifier = Modifier.padding(all = 5.dp),
+                  Text(modifier = Modifier.padding(all = 6.dp),
                        text = game.genre,
                        style = MaterialTheme.typography.caption,
                        color = Color.Black
