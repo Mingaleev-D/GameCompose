@@ -27,7 +27,6 @@ class GameRepositoryImpl @Inject constructor(private val api: ApiService) : Base
          )
       }
    }
-
    override suspend fun getGame(id: Int): ResourceNetwork<GameDetail?> {
       val response = invokeApi {
          api.getGame(id = id)
@@ -37,6 +36,31 @@ class GameRepositoryImpl @Inject constructor(private val api: ApiService) : Base
          is ResourceNetwork.Loading -> ResourceNetwork.Loading()
          is ResourceNetwork.Success -> ResourceNetwork.Success(
              data = response.data?.toGameDetail()
+         )
+      }
+   }
+   override suspend fun getGamesByPlatform(platform: String): ResourceNetwork<List<Game>> {
+      val response = invokeApi {
+         api.getGameByPlatform(platform = platform)
+      }
+      return when(response){
+         is ResourceNetwork.Error -> ResourceNetwork.Error(error  = response.error)
+         is ResourceNetwork.Loading -> ResourceNetwork.Loading()
+         is ResourceNetwork.Success -> ResourceNetwork.Success(
+             data = response.data?.map { it.toGame() }?: emptyList()
+         )
+      }
+   }
+
+   override suspend fun sortGames(criteria: String): ResourceNetwork<List<Game>> {
+      val response = invokeApi {
+         api.sortGame(criteria = criteria)
+      }
+      return when(response){
+         is ResourceNetwork.Error -> ResourceNetwork.Error(error  = response.error)
+         is ResourceNetwork.Loading -> ResourceNetwork.Loading()
+         is ResourceNetwork.Success -> ResourceNetwork.Success(
+             data = response.data?.map { it.toGame() }?: emptyList()
          )
       }
    }
