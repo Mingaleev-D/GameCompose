@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -72,6 +71,7 @@ class MainActivity : ComponentActivity() {
                 },
                 onHomeMenuClick = {
                    scope.launch {
+                     // val path = Screen.HomeScreen.route
                       scaffoldState.drawerState.close()
                       navController.navigate(route = Screen.HomeScreen.route)
                    }

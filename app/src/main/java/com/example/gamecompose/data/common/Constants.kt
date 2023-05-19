@@ -22,5 +22,6 @@ object Constants {
    const val SEARCH_SCREEN_MODE_KEY = "mode"
    const val PC_GAMES = "pc"
    const val BROWSER_GAMES  = "browser"
+   const val CURRENT_ROUTE_KEY = "current-route-key"
 
 }

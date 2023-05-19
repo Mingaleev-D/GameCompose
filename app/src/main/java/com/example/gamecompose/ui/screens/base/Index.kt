@@ -10,6 +10,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
@@ -34,6 +37,7 @@ import com.example.gamecompose.ui.screens.game.GameDetailScreen
 import com.example.gamecompose.ui.screens.home.HomeScreen
 import com.example.gamecompose.ui.screens.search.SearchScreen
 import com.example.gamecompose.ui.viewmodel.GameDetailViewModel
+import com.example.gamecompose.ui.viewmodel.MainViewModel
 import com.example.gamecompose.ui.viewmodel.SearchViewModel
 import com.intuit.sdp.R
 
